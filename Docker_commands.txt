@@ -1,0 +1,7 @@
+sudo docker pull mysql:5.7
+sudo docker pull wordpress:latest
+
+
+sudo docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=wordpresspass -e MYSQL_DATABASE=wordpress -d mysql:5.7
+sudo docker run --name wordpress-container -p 80:80 -e WORDPRESS_DB_HOST=mysql-container:3306 -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=wordpresspass -e WORDPRESS_DB_NAME=wordpress --link mysql-container:mysql -d wordpress
+sudo docker ps
